@@ -4,7 +4,6 @@ phases:
   install:
     commands:
       - sudo pip install anchorecli
-
   build:
     commands:
       - docker login -u $dockerhubUser -p $dockerhubPass
@@ -16,4 +15,7 @@ phases:
       - echo "Waiting for image to finish analysis"
       - anchore-cli image wait jvalance/node_critical_fail:latest
       - echo "Analysis complete"
-      - if [ "$ANCHORE_FAIL_ON_POLICY" == "true" ] ; then anchore-cli evaluate check jvalance/node_critical_fail:latest  ; fi
+      - if [ "$ANCHORE_FAIL_ON_POLICY" = "true" ] ; then anchore-cli evaluate check jvalance/node_critical_fail:latest  ; fi
+    finally:
+      - echo "Pushing image to Docker Hub"
+      - docker push jvalance/node_critical_fail
