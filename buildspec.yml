@@ -9,6 +9,7 @@ phases:
       - docker login -u $dockerhubUser -p $dockerhubPass
       - docker build -t jvalance/node_critical_fail .
       - docker push jvalance/node_critical_fail
+
   post_build:
     commands:
       - anchore-cli image add jvalance/node_critical_fail:latest
@@ -16,6 +17,5 @@ phases:
       - anchore-cli image wait jvalance/node_critical_fail:latest
       - echo "Analysis complete"
       - if [ "$ANCHORE_FAIL_ON_POLICY" = "true" ] ; then anchore-cli evaluate check jvalance/node_critical_fail:latest  ; fi
-    finally:
       - echo "Pushing image to Docker Hub"
       - docker push jvalance/node_critical_fail
