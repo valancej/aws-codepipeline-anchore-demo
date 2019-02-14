@@ -7,6 +7,7 @@ phases:
   pre_build:
     commands:
       - docker build -t jvalance/node_critical_fail .
+      - docker push jvalance/node_critical_fail
   build:
     commands:
       - echo Build started on `date`
