@@ -1,4 +1,4 @@
-# Adding Container Security and Compliance Scanning to your AWS CodeBuild Pipeline
+# Adding Container Security and Compliance Scanning to your AWS CodeBuild pipeline.
 
 ## Introduction
 
