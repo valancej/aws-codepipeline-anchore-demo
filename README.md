@@ -7,7 +7,7 @@ This will walkthrough integrating Anchore scanning with AWS CodeBuild. During th
 ## Prerequisites
 
 - Running Anchore Engine Service
-- AWS Account
+- AWS account
 - Repository that contains a Dockerfile
 
 ## Setup
