@@ -4,6 +4,7 @@ phases:
   install:
     commands:
       - sudo pip install anchorecli
+      
   build:
     commands:
       - docker login -u $dockerhubUser -p $dockerhubPass
