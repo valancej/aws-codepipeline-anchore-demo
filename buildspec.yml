@@ -6,6 +6,7 @@ phases:
       - sudo pip install anchorecli
   pre_build:
     commands:
+      - docker login -u jvalance -p 226137@kKk
       - docker build -t jvalance/node_critical_fail .
       - docker push jvalance/node_critical_fail
   build:
