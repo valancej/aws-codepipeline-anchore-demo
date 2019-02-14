@@ -4,15 +4,17 @@ phases:
   install:
     commands:
       - sudo pip install anchorecli
-  pre_build:
+  build:
     commands:
       - docker login -u $dockerhubUser -p $dockerhubPass
       - docker build -t jvalance/node_critical_fail .
       - docker push jvalance/node_critical_fail
-  build:
+  scan:
     commands:
-      - echo Build started on `date`
-      - mvn install
+      - anchore-cli image add jvalance/node_critical_fail:latest
+      - anchore-cli image wait jvalance/node_critical_fail:latest
+      - echo "Analysis complete"
+      - if [ "$ANCHORE_FAIL_ON_POLICY" == "true" ] ; then anchore-cli evaluate check jvalance/node_critical_fail:latest  ; fi
   post_build:
     commands:
-      - echo Build completed on `date`
+      - docker push jvalance/node_critical_fail
