@@ -2,12 +2,13 @@
 
 ## Introduction
 
-This will walkthrough integrating Anchore scanning into a AWS CodeBuild pipeline. During the first step, a Docker image will be built from a Dockerfile. Following this, during the second step Anchore will scan the image, and depending on the result of the policy evaluation, proceed to the final step. During the final step the built image will be pushed to a Docker registry.
+This will walkthrough integrating Anchore scanning with AWS CodeBuild. During the first step, a Docker image will be built from a Dockerfile. Following this, during the second step, Anchore will scan the image, and depending on the result of the policy evaluation, proceed to the final step. During the final step the built image will be pushed to a Docker registry.
 
 ## Prerequisites
 
 - Running Anchore Engine Service
 - AWS Account
+- Repository that contains a Dockerfile
 
 ## Setup
 
@@ -25,6 +26,10 @@ I've added the following environment variables in the build project setup:
 - dockerhubPass
 
 A `buildspec.yml` file should exist in the root directory of the Github repository you will link to your CodeBuild setup.
+
+## Install
+
+In the install phase of the buildspec.yml file we install the Anchore CLI. You can find more info by referencing the GitHub repo [here](https://github.com/anchore/anchore-cli).
 
 ## Build image
 
@@ -53,8 +58,9 @@ post_build:
       - docker push jvalance/node_critical_fail
 ```
 
-As a reminder, we advise having separate Docker registries for images that are being scanned with Anchore, and images that have passed an Anchore scan. For example, a registry for dev/test images, and a registry to certified, trusted, production-ready images.
+As a reminder, we advise having separate Docker registries for images that are being scanned with Anchore, and images that have passed an Anchore scan. For example, a registry for dev/test images, and a registry to certified, trusted, production-ready images. You may have noticed during this walkthrough I am using the same Docker Hub repository for all steps. This is not recommended for a production-grade deployment. 
 
+You can read more about Anchore on our [website](https://anchore.com). Additionally, you can find out more information on AWS CodeBuild by referencing their [documentation](https://docs.aws.amazon.com/codebuild/index.html#lang/en_us).
 
 
 
