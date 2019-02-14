@@ -3,7 +3,6 @@ version: 0.2
 phases:
   install:
     commands:
-      - sudo apt-get install python-pip
       - sudo pip install anchorecli
   pre_build:
     commands:
