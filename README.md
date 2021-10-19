@@ -21,7 +21,7 @@ I've added the following environment variables in the build project setup:
 - ANCHORE_CLI_URL
 - ANCHORE_CLI_USER
 - ANCHORE_CLI_PASS
-- ANCHORE_CLI_FAIL_ON_POLICY
+- ANCHORE_FAIL_ON_POLICY
 - dockerhubUser
 - dockerhubPass
 
